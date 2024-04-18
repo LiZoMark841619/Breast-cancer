@@ -56,7 +56,7 @@ def pair_(X: np.array) -> plt:
     plt.show()
     plt.clf()
     
-def roc_(model, X, y):
+def roc_(model, X, y) -> plt:
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
     fpr, tpr, thresholds = roc_curve(y_test,model.predict_proba(X_test)[:,1])
     plt.figure(figsize=[12, 10])
