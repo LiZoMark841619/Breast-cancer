@@ -10,9 +10,8 @@ if answer == 'yes':
     while True:
         answer = input('To make a dataframe enter yes, else no! ').lower()
         if answer == 'no':
-            print('Understood. ')
+            print('Understood. Bye!')
             break
-        
         elif answer == 'yes':
             df = pd.DataFrame(data.data, columns=data.feature_names)
             print(f'You have just transformed {data.filename} into a pandas DataFrame.\n')
@@ -23,13 +22,12 @@ if answer == 'yes':
                 if answer == "info":
                     print(df.info()); break
                 elif answer == "desc":
-                    print('-'*50,'\n','-'*50,'\n',df.describe()); break
+                    print('-'*50,'\n',df.describe()); break
                 elif answer == "both": 
                     print(df.info(),'\n',df.describe()); break
                 elif answer == "none": break
                 print(f'{answer} is not a valid option.'); continue
 
-            dataframe = df
-            break
-else: 
-    print('Understood. Good bye! ')
+            dataframe = df; break
+else:
+    print('Understood, good bye!')
