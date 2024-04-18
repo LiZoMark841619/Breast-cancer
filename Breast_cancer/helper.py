@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score
 
-def heatmap(dataframe):
+def corr_(dataframe: pd.DataFrame) -> list:
     
     feats = dataframe.columns.to_list()[:10]
     matrix = dataframe[feats].corr()
@@ -14,13 +15,15 @@ def heatmap(dataframe):
             if abs(matrix.iloc[i, j]) < 0.7:
                 selected.add(matrix.columns[i])
     selected = list(selected)
-                                
+    return selected
+
+def custom_heat(dataframe: pd.DataFrame, feats: list) -> plt:
+
     plt.figure(figsize=[12, 10])
-    sns.heatmap(dataframe[selected].corr(), annot=True, cmap="mako", linewidths=2, linecolor='white')
+    sns.heatmap(dataframe[feats].corr(), annot=True, cmap="mako", linewidths=2, linecolor='white')
     plt.title('Heatmap')
     plt.show()
     plt.clf()
-    
     
 def confusion(model, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
