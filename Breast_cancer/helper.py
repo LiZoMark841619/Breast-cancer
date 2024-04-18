@@ -23,7 +23,6 @@ def custom_heat_(dataframe, feats: list) -> plt:
     plt.figure(figsize=[12, 10])
     sns.heatmap(dataframe[feats].corr(), annot=True, cmap="mako", linewidths=2, linecolor='white')
     plt.title('Heatmap')
-    plt.savefig('good_heatmap.png')
     plt.show()
     plt.clf()
     
@@ -52,7 +51,6 @@ def pair_(X: np.array) -> plt:
     plt.style.use('ggplot')
     plt.figure(figsize=[12, 10])
     sns.pairplot(X, diag_kind = "kde")
-    plt.savefig('pairplot.png')
     plt.show()
     plt.clf()
     
@@ -76,5 +74,4 @@ def roc_(model, X, y) -> plt:
     plt.title('ROC Curve')
     plt.grid()
     plt.legend(loc="lower right")
-    plt.savefig('ROC.png')
     plt.show()
