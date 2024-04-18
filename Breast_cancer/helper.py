@@ -28,7 +28,7 @@ def custom_heat_(dataframe, feats: list) -> plt:
     plt.clf()
     
 def confusion_(model, X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
+    X_test, y_test = train_test_split(X, y, test_size=0.30, random_state=50)[1::], 
     threshs = [i*1/10 for i in range(1, 10)]
     for thresh in reversed(threshs):
         plt.figure(figsize=[8, 6])
@@ -39,7 +39,7 @@ def confusion_(model, X, y):
             Accuracy: {round(100*accuracy_score(y_test, y_pred))}%\n\n\n\n\n
             Precision: {round(100*precision_score(y_test, y_pred))}%\n\n\n\n\n
             Recall: {round(100*recall_score(y_test, y_pred))}%''')
-        plt.text(x= 2.5, y=2.0, s=f'F1_score: {round(100*f1_score(y_test, y_pred))}%', fontsize=13)
+        plt.text(x= 2.4, y=2.0, s=f'F1_score: {round(100*f1_score(y_test, y_pred))}%', fontsize=13)
         plt.text(x= .30, y=0.25, s='True negative')
         plt.text(x= .30, y=1.25, s='False negative')
         plt.text(x= 1.30, y=0.25, s='False positive')
