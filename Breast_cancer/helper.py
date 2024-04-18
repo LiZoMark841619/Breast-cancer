@@ -4,8 +4,6 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score
 
-
-
 def heatmap(dataframe):
     
     feats = dataframe.columns.to_list()[:10]
@@ -24,7 +22,7 @@ def heatmap(dataframe):
     plt.clf()
     
     
-def confusion_matrix(model, X, y):
+def confusion(model, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
     threshs = [i*1/10 for i in range(1, 10)]
     for thresh in reversed(threshs):

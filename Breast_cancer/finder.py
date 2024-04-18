@@ -26,7 +26,7 @@ if answer == 'yes':
                     print('-'*50,'\n','-'*50,'\n',df.describe()); break
                 elif answer == "both": 
                     print(df.info(),'\n',df.describe()); break
-                elif answer == "None": break
+                elif answer == "none": break
                 print(f'{answer} is not a valid option.'); continue
 
             dataframe = df
