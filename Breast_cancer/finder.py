@@ -28,6 +28,6 @@ if answer == 'yes':
                 elif answer == "none": break
                 print(f'{answer} is not a valid option.'); continue
 
-            dataframe = df; break
+            break
 else:
     print('Understood, good bye!')

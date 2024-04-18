@@ -34,15 +34,15 @@ def confusion_(model, X, y):
         y_pred = np.where(model.predict_proba(X_test)[:, 1] > thresh, 1, 0)
         sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Greens', linewidths=2, linecolor='white',
         xticklabels=['Predicted malignant', 'Predicted benign'], yticklabels=['Actual malignant', 'Actual benign'])
-        plt.text(x= 2.5, y=1.40, s=f'''
+        plt.text(x= 2.25, y=1.40, s=f'''
             Accuracy: {round(100*accuracy_score(y_test, y_pred))}%\n\n\n\n\n
             Precision: {round(100*precision_score(y_test, y_pred))}%\n\n\n\n\n
             Recall: {round(100*recall_score(y_test, y_pred))}%''')
         plt.text(x= 2.4, y=2.0, s=f'F1_score: {round(100*f1_score(y_test, y_pred))}%', fontsize=13)
-        plt.text(x= .30, y=0.25, s='True negative')
-        plt.text(x= .30, y=1.25, s='False negative')
-        plt.text(x= 1.30, y=0.25, s='False positive')
-        plt.text(x= 1.30, y=1.25, s='True positive')
+        plt.text(x= .40, y=0.25, s='True negative')
+        plt.text(x= .40, y=1.25, s='False negative')
+        plt.text(x= 1.40, y=0.25, s='False positive')
+        plt.text(x= 1.40, y=1.25, s='True positive')
         plt.title(f'Confusion matrix - prediction threshold: {thresh}')
         plt.show()
         plt.clf()
