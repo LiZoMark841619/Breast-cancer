@@ -28,7 +28,7 @@ def custom_heat_(dataframe, feats: list) -> plt:
     plt.clf()
     
 def confusion_(model, X, y):
-    X_test, y_test = train_test_split(X, y, test_size=0.30, random_state=50)[1::]
+    X_test, y_test = train_test_split(X, y, test_size=0.30, random_state=50)[1::2]
     threshs = [i*1/10 for i in range(1, 10)]
     for thresh in reversed(threshs):
         plt.figure(figsize=[8, 6])
