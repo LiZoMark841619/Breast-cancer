@@ -1,0 +1,33 @@
+import pandas as pd
+import sklearn.datasets as datasets
+
+answer = input('Would you like to load the breast cancer dataset from sklearn? Enter yes or no! ').lower()
+
+if answer == 'yes':
+    data = datasets.load_breast_cancer()
+    print(f'Good job. You just loaded the {data.filename} file!\n')
+         
+    while True:
+        answer = input('Would you like to make a dataframe? Enter yes or no! ').lower()
+        if answer == 'no':
+            print('Ok, understood. ')
+            break
+        
+        elif answer == 'yes':
+            df = pd.DataFrame(data.data, columns=data.feature_names)
+            print(f'You have just transformed {data.filename} into a pandas DataFrame.\n')
+            
+            while True:
+                options = ["info", "desc", "both", "None"]
+                answer = input(f'Please pick a valid option from {options}! ')
+                
+                if answer == "info": print(df.info()); break
+                elif answer == "desc": print('-'*50,'\n','-'*50,'\n',df.describe()); break
+                elif answer == "both": print(df.info(),'\n',df.describe()); break
+                elif answer == "None": break
+                print(f'{answer} is not a valid option.'); continue
+
+            dataframe = df
+            break
+else: 
+    print('Understood. Good bye! ')
