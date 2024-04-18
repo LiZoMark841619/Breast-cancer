@@ -1,11 +1,12 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_curve, roc_auc_score
+from sklearn.dummy import DummyClassifier
 
-def corr_(dataframe: pd.DataFrame) -> list:
+
+def corr_(dataframe) -> list:
     
     feats = dataframe.columns.to_list()[:10]
     matrix = dataframe[feats].corr()
@@ -17,15 +18,16 @@ def corr_(dataframe: pd.DataFrame) -> list:
     selected = list(selected)
     return selected
 
-def custom_heat(dataframe: pd.DataFrame, feats: list) -> plt:
+def custom_heat_(dataframe, feats: list) -> plt:
 
     plt.figure(figsize=[12, 10])
     sns.heatmap(dataframe[feats].corr(), annot=True, cmap="mako", linewidths=2, linecolor='white')
     plt.title('Heatmap')
+    plt.savefig('good_heatmap.png')
     plt.show()
     plt.clf()
     
-def confusion(model, X, y):
+def confusion_(model, X, y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
     threshs = [i*1/10 for i in range(1, 10)]
     for thresh in reversed(threshs):
@@ -45,3 +47,34 @@ def confusion(model, X, y):
         plt.title(f'Confusion matrix - prediction threshold: {thresh}')
         plt.show()
         plt.clf()
+
+def pair_(X: np.array) -> plt:
+    plt.style.use('ggplot')
+    plt.figure(figsize=[12, 10])
+    sns.pairplot(X, diag_kind = "kde")
+    plt.savefig('pairplot.png')
+    plt.show()
+    plt.clf()
+    
+def roc_(model, X, y):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=50)
+    fpr, tpr, thresholds = roc_curve(y_test,model.predict_proba(X_test)[:,1])
+    plt.figure(figsize=[12, 10])
+    plt.plot(fpr, tpr, color='darkorange',
+            label='ROC curve')
+    idx = list(range(len(thresholds)))[1::4]
+    for i in idx:
+        plt.text(fpr[i], tpr[i], thresholds[i].round(2))
+
+    clf = DummyClassifier(strategy='most_frequent', random_state=0)
+    clf.fit(X_train, y_train)
+    roc_auc = roc_auc_score(y_test, clf.predict_proba(X_test)[:,1] )
+    fpr, tpr, thresholds = roc_curve(y_test, clf.predict_proba(X_test)[:,1])
+    plt.plot(fpr, tpr, color='navy',linestyle='--', label='Dummy Classifier (most frequent) \n (area = %0.2f)' % roc_auc)
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve')
+    plt.grid()
+    plt.legend(loc="lower right")
+    plt.savefig('ROC.png')
+    plt.show()
